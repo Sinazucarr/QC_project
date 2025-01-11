@@ -1,1 +1,40 @@
 .DS_Store
+
+### VSCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+*/.vscode
+
+
+
+### jp-workdir ###
+
+# private workdir
+./jupiter-notebook/code/*
+
+# checkpoints
+*/.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+.ipynb_checkpoints
+.ipynb_checkpoints/*
+
+### LaTeX ###
+## Core latex/pdflatex auxiliary files:
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+.*.lb
+
+**/.obsidian/**
