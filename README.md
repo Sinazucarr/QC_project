@@ -1,4 +1,6 @@
-Consiglio di creare una propria cartella con il proprio nome all'interno della cartella "relazione" ```
+# README
+
+Consiglio di creare una propria cartella con il proprio nome all'interno della cartella "relazione"
 ```esempio: 
 mkdir ./relazione/<proprio_nome>
 ```
