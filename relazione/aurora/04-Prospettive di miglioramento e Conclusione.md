@@ -40,12 +40,12 @@ Oltre all'algoritmo di Grover, un'alternativa più efficiente per risolvere prob
 
 #### **Modellazione del Sudoku come Problema di Ottimizzazione**
 
-Il Sudoku $2 \times 2$ può essere formulato come un problema di ottimizzazione combinatoria, in cui l'obiettivo è minimizzare una funzione di costo che penalizza configurazioni non valide. La funzione obiettivo è costruita come segue:
+Sudoku $2 \times 2$ può essere formulato come un problema di ottimizzazione combinatoria, in cui l'obiettivo è minimizzare una funzione di costo che penalizza configurazioni non valide. In questo caso, ogni cella può contenere esclusivamente i valori $0$ e $1$, e tali valori possono essere rappresentati direttamente da variabili binarie.
 
-1. **Celle non Valide**: Ogni cella deve contenere un valore compreso nell'insieme $\{1, 2, 3, 4\}$, rappresentabile da qubit per cella.
-2. **Regole del Sudoku**: Penalità assegnate per:
-    - Valori duplicati nelle righe e colonne.
-    - Valori duplicati nel blocco $2 \times 2$.
+La funzione obiettivo è costruita come segue:
+
+1. **Regole sulle Righe e Colonne:** Viene assegnata una penalità se la somma dei valori in una riga o colonna è maggiore di $1$, indicando la presenza di duplicati.
+2. **Regola del Blocco:** La somma totale dei valori nel blocco $2 \times 2$ deve essere pari a $2$, pena l'assegnazione di una penalità.
 
 La funzione obiettivo complessiva può essere scritta come:
 $$C(x) = C_{\text{righe}} + C_{\text{colonne}} + C_{\text{blocchi}}​
@@ -53,12 +53,11 @@ $$
 dove $C_{\text{righe}}, C_{\text{colonne}}$​ e $C_{\text{blocchi}}​$ rappresentano i contributi alle penalità.
 
 #### **Esecuzione dell'Algoritmo**
-
-1. **Stato Iniziale**: Lo stato quantistico iniziale è una sovrapposizione uniforme di tutte le possibili configurazioni.
-2. **Operatori Parametrizzati**: QAOA utilizza due operatori parametrizzati:
-    - Un operatore costruttivo basato su $C(x)$, che codifica le penalità del problema.
-    - Un operatore di miscelazione, che esplora lo spazio delle soluzioni.
-3. **Ottimizzazione Variazionale**: I parametri degli operatori sono ottimizzati classicamente per massimizzare la probabilità di ottenere una configurazione valida.
+1. **Stato Iniziale:** Lo stato iniziale è una sovrapposizione uniforme di tutte le configurazioni possibili della griglia binaria.
+2. **Operatori Parametrizzati:** QAOA utilizza due operatori:
+    - **Operatore costruttivo** basato su $C(x)$, che introduce una fase proporzionale alla funzione di costo, penalizzando gli stati con configurazioni non valide.
+    - **Operatore di miscelazione**, che esplora lo spazio delle soluzioni.
+3. **Ottimizzazione Variazionale:** I parametri degli operatori sono ottimizzati tramite un algoritmo classico per minimizzare la funzione di costo, massimizzando così la probabilità di ottenere configurazioni valide.
 
 ### **Confronto tra Algoritmo di Grover e QAOA nel Sudoku $2 \times 2$**
 
