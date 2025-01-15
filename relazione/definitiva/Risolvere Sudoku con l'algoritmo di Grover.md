@@ -87,7 +87,7 @@ Il primo passaggio si occupa della sovrapposizione uniforme dello stato iniziale
 
 IIl secondo passaggio applica la riflessione dell'oracolo allo stato $\ket{s}$. Questa trasformazione viene eseguita sullo stato $\ket{w}$ (stato che esprime la soluzione esatta), facendolo diventare negativo. Questo implica che la media delle altezze di tutte le possibili soluzioni si abbassa. Vediamo i grafici:
 
-![[relazione/arianna/img-02/step2.png]]
+![[relazione/definitiva/img-02/step2.png]]
 
 Ora non ci resta che l'ultimo passaggio, in cui viene applicata la diffusione, che si occupa di riportare lo stato $\ket{w}$ nello stato originale (positivo). Tuttavia, dato che, sottraendo la media a tutte le soluzioni, incluso $\ket{w}$, quest'ultimo si trova nello stato negativo e gli viene sottratta la media, esso diventa ancora più negativo. Successivamente, riportandolo nello stato originale (positivo), esso avrà un'ampiezza più amplificata rispetto a tutti gli altri stati che non sono vere soluzioni.
 
@@ -111,6 +111,7 @@ c & d\\
 \end{pmatrix}$$
 L'oracolo, procede confrontando tutte le possibile coppie $(ab,bc,cd,bd)$ attraverso porta "$XOR$" costruita con l'applicazione di una porta X (NOT) al target, seguita da una porta MCX (restituisce l'ancilla negata se tutti i \[control value] sono uguali a 1) e infine applica nuovamente la porta X per riportare il valore target all'origine. Queste operazioni sono utili per capire se i qubit che confronto sono uguali.
 Di seguito viene riportato la parte di codice che si occupa di definire l'oracolo come descritto:
+
 ```python
 # Compare two qubits using an ancilla qubit
 def compare(qc, control_qubit, target_qubit, ancilla_qubit):
@@ -134,7 +135,8 @@ def oracle(qc):
     XOR(qc, qubits[0], qubits[2], ancilla_ac)    
     XOR(qc, qubits[1], qubits[3], ancilla_bd)
     XOR(qc, qubits[2], qubits[3], ancilla_cd)
-    ```
+```
+    
 Come visto nel codice, il susseguirsi di "porte" XOR, ci serve per garantire che tutte le clausole di cui abbiamo parlato nel capitolo [[#2.3-Grover per Sudoku 2x2]] vengano rispettate per ottenere uno stato dal circuito che sia una soluzione valida per il Sudoku.
 
 In questa fase vengono quindi testate tutte le possibili combinazioni $N_k$ che appartengono allo spazio delle combinazioni $N$, con $k$ equivalente al numero di combinazioni possibili.
@@ -173,6 +175,7 @@ def diffuser(qc):
 
     qc.barrier()
 ```
+
 Questo è ottenuto applicando l'azione di Grover definita nel capitolo [[#2.3-Grover per Sudoku 2x2]] dove appunto andiamo a dedicare la porta $H$ riportando i qubits in una sovrapposizione uniforme e successivamente $X$ nega tutti i qubits, a questo punto non ci resta che inverte il valore di probabilità di ogni stato rispetto alla media, amplificando gli stati precedentemente marcati dall'oracolo applicando le porte nel seguente ordine - $H$(applicata al qubit target trasforma lo stato in una base di lavoro), $MCX$(introduce un'inversione condizionale sugli stati, questo contribuisce a riflettere il vettore di stato rispetto alla media) e $H$(ripristina il qubit target nella base standard) - ripristino lo stato iniziale dei qubit applicando all'inverso le due porte iniziali $H$ e $X$.
 ## 3.2-Rumore
 Siccome l'obbiettivo è quello di creare una simulazione di un caso reale, prima della stampa dei risultati viene costruito e applicato un modello di rumore per simulare le condizioni reali di un circuito quantistico.
@@ -330,15 +333,10 @@ Che riporta il seguente risultato a livello grafico:
 
 Possiamo notare come le probabilità che le soluzioni accettate si verifichino è molto alta, ma il vero obiettivo è il fatto che le due probabilità delle due soluzioni sono veramente vicine con uno scarto di sole 10 unità che con un numero di *shots* elevato è difficile da ottenere.
 
-Un ulteriore metodo più complesso, riguarda la **matrice di calibrazione** dove ogni dispositivo quantistico ha una probabilità di errore associata alla misurazione di ciascun stato, ad esempio le due probabilità principali che entrano in gioco in un errore di misurazione sono: 
-$$
-\begin{equation*}
-\begin{aligned}[c]
-P(0 \rightarrow 1)\; \text{probabilità che una misurazione su uno stato} \; \ket{0} \; \text{dia erroneamente il risultato} \; \ket{1}\\
-P(1 \rightarrow 0)\; \text{probabilità che una misurazione su uno stato} \; \ket{1} \; \text{dia erroneamente il risultato} \; \ket{0}
-\end{aligned}
-\end{equation*}
-$$
+Un ulteriore metodo più complesso, riguarda la **matrice di calibrazione** dove ogni dispositivo quantistico ha una probabilità di errore associata alla misurazione di ciascun stato, ad esempio le due probabilità principali che entrano in gioco in un errore di misurazione sono:
+- $P(0 \rightarrow 1)$: probabilità che una misurazione su uno stato $\ket{0}$ dia erroneamente il risultato $\ket{1}$
+- $P(1 \rightarrow 0)$: probabilità che una misurazione su uno stato $\ket{1}$ dia erroneamente il risultato $\ket{0}$
+
 Queste probabilità di errore possono essere raccolte in una matrice di calibrazione, che descrive come la misurazione di ogni qubit può essere errata.
 $$
 \begin{pmatrix}
