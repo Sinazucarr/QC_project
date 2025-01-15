@@ -157,7 +157,7 @@ measurement_error_on = False    # Toggle measurement error
 simulation_shots = 1024       # Number of shots for the simulation
 grover_iterations = 2         # Set 0 to use the suggested optimal value
 ```
-![[relazione/claudio/IMG/Histo_test_1.png]]
+[[/relazione/claudio/IMG/Histo_test_1.png]]
 ```python
 # Flags for enabling specific errors noises
 depolarization_noise_on = False # Toggle depolarization noise
@@ -168,7 +168,7 @@ measurement_error_on = True     # Toggle measurement error
 simulation_shots = 1024       # Number of shots for the simulation
 grover_iterations = 2         # Set 0 to use the suggested optimal value
 ```
-![[relazione/claudio/IMG/Histo_test_4.png]]
+[[/relazione/claudio/IMG/Histo_test_4.png]]
 ```python
 # Flags for enabling specific errors noises
 depolarization_noise_on = False # Toggle depolarization noise
@@ -179,7 +179,7 @@ measurement_error_on = True     # Toggle measurement error
 simulation_shots = 1024       # Number of shots for the simulation
 grover_iterations = 2         # Set 0 to use the suggested optimal value
 ```
-![[relazione/claudio/IMG/Histo_test_3 1.png]]
+[[/relazione/claudio/IMG/Histo_test_3 1.png]]
 ```python
 # Flags for enabling specific errors noises
 depolarization_noise_on = True # Toggle depolarization noise
@@ -190,7 +190,7 @@ measurement_error_on = True    # Toggle measurement error
 simulation_shots = 1024       # Number of shots for the simulation
 grover_iterations = 2         # Set 0 to use the suggested optimal value
 ```
-![[relazione/claudio/IMG/Histo_test_2.png]]
+[[/relazione/claudio/IMG/Histo_test_2.png]]
 Risulta evidente che il caso peggiore lo troviamo quando errori di misura e di depolarizzazione si combinano. Ovviamente nel nostro caso il risultato non è compromesso, ma è necessario prenderne atto.
 
 ### 3.2.2 Contromisure
@@ -208,7 +208,7 @@ measurement_error_on = True    # Toggle measurement error
 simulation_shots = 10024       # Number of shots for the simulation
 grover_iterations = 2         # Set 0 to use the suggested optimal value
 ```
-![[relazione/claudio/IMG/Histo_test_5.png]]
+[[/relazione/claudio/IMG/Histo_test_5.png]]
 Per quanto possa sembrare poco diverso da prima, si nota una riduzione del 6% della distanza fra il conteggio della massima soluzione e il conteggio della massima non soluzione. In altre parole, abbiamo "allontano" la più probabile non soluzione dalle soluzioni.
 
 **Ripetizione delle misure:**
@@ -241,7 +241,7 @@ if reduce_random:
     total_shots = sum(average_counts.values())
     raw_data = {key: value / total_shots for key, value in average_counts.items()}
 ```
-![[relazione/claudio/IMG/Histo_test_7.png]]Essendo le soluzioni del nostro problema non polarizzate, ovvero equiprobabili, migliorare la qualità delle misure avvicina questi valori fra loro rendendoli decisamente evidenti.
+[[/relazione/claudio/IMG/Histo_test_7.png]]Essendo le soluzioni del nostro problema non polarizzate, ovvero equiprobabili, migliorare la qualità delle misure avvicina questi valori fra loro rendendoli decisamente evidenti.
 
 ## 3.3 Output
 Oltre agli istogrammi che abbiamo visto nella sezione precedente, il codice produce anche l'immagine di un circuito e ci stampa la soluzione.
@@ -255,4 +255,4 @@ Solution 1:
  [['0' '1']
  ['1' '0']]
 ```
-![[relazione/claudio/IMG/Circuit_test_1 1.png]]
+[[/relazione/claudio/IMG/Circuit_test_1 1.png]]
